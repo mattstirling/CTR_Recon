@@ -4,35 +4,29 @@ Created on Feb 23, 2016
 @author: mstirling
 '''
 import pandas as pd
-from OC_Map_Rules import OC_apply_map_rule
-#control variables
-bWriteReport = 1
+from GSBL.Recon_trade_id_list.GSBL_Map_Rules import GSBL_apply_map_rule
 
 #in files
-in_folder = 'C:/Temp/python/in/CTR files/OC/'
-in_file_FX_Forward = 'OBJCHARLIESE_FX_Forward_D_20160218_4_Stress_Testing.csv'
-in_file_NDF = 'OBJCHARLIESE_NDF_D_20160218_4_Stress_Testing.csv'
+in_folder = 'C:/Temp/python/in/CTR files/GSBL/'
+in_file_SBL = 'GSBL_SBL_Exposure_D_20160224_25_Stress_Testing.csv'
 
 #in map files
-in_map_folder = 'C:/Temp/python/in/CTR_RW_Map/OC/'
-in_map_file_FX_Forward = 'CTR_RW_Map_FX_Forward.csv'
-in_map_file_NDF = 'CTR_RW_Map_NDF.csv'
+in_map_folder = 'C:/Temp/python/in/CTR_RW_Map/GSBL/'
+in_map_file_SBL = 'CTR_RW_Map_SBL.csv'
 
 #out files
 out_folder = 'C:/Temp/python/out/CTR Files/OC/'
-out_file_merged = 'CTR_denormalized_20160218.csv'
+out_file_SBL = 'CTR_denormalized_20160218.csv'
 
 #open in_files
-df_FX_Forward = pd.read_csv(in_folder+in_file_FX_Forward)
-df_FX_NDF = pd.read_csv(in_folder+in_file_NDF)
+df_SBL = pd.read_csv(in_folder+in_file_SBL)
 
 #open mapping files
-df_map_FX_Forward = pd.read_csv(in_map_folder+in_map_file_FX_Forward)
-df_map_FX_NDF = pd.read_csv(in_map_folder+in_map_file_NDF)
+df_map_SBL = pd.read_csv(in_map_folder+in_map_file_SBL)
 
 #get columns to write from mapping files
 #out_cols are the same per Riskwatch file
-out_cols_FX_Deals = [col for col in df_map_FX_Forward['RW Column Name']]
+out_cols_FX_Deals = [col for col in df_map_SBL['RW Column Name']]
 
 #apply mapping rules
 # 1 - FX_Forward (apply mapping rules)
