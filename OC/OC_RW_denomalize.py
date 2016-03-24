@@ -17,7 +17,6 @@ in_file_FX_Deals_PFE = 'FXOCDEALS_SE_PFE.CSV.20160218'
 #out folder
 out_folder = 'C:/Temp/python/out/RW Files/OC/'
 out_file_FX_Deals = 'RW_denormalized_FXOCDEALS_SE.CSV.20160218'
-#summary_out_filename = 'k2_summary'+ time.strftime("%Y%m%d") + '.csv'
 
 #open in_files
 df_FX_Deals = pd.read_csv(in_folder+in_file_FX_Deals)
