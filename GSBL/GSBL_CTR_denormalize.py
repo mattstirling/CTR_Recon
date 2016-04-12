@@ -4,7 +4,7 @@ Created on Feb 23, 2016
 @author: mstirling
 '''
 import pandas as pd
-from GSBL.Recon_trade_id_list.GSBL_Map_Rules import GSBL_apply_map_rule
+#from GSBL_Map_Rules import GSBL_apply_map_rule
 
 #in files
 in_folder = 'C:/Temp/python/in/CTR files/GSBL/'

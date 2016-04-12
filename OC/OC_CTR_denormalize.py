@@ -4,7 +4,7 @@ Created on Feb 23, 2016
 @author: mstirling
 '''
 import pandas as pd
-from OC.OC_Map_Rules import OC_apply_map_rule
+from OC_Map_Rules import OC_apply_map_rule
 #control variables
 bWriteReport = 1
 

@@ -10,10 +10,10 @@ from GSBL_Map_Rules import GSBL_apply_map_rule
 b_merge_data = 0
 
 #in files
-in_folder = 'C:/Temp/python/in/CTR files/GSBL/'
-in_file_SBL = 'GSBL_SBL_Exposure_D_20160224_25_Stress_Testing.csv'
-in_file_Repo = 'GSBL_Repo_Reverse_Repo_D_20160224_25_Stress_Testing.csv'
-in_file_Collateral = 'GSBL_SBL_Collateral_D_20160224_25_Stress_Testing.csv'
+in_folder = 'C:/Temp/python/in/CTR files/GSBL/20160330/'
+in_file_SBL = 'GSBL_SBL_Exposure_D_20160330_25_Stress_Testing.csv'
+in_file_Repo = 'GSBL_Repo_Reverse_Repo_D_20160330_25_Stress_Testing.csv'
+in_file_Collateral = 'GSBL_SBL_Collateral_D_20160330_25_Stress_Testing.csv'
 
 #in map files
 in_map_folder = 'C:/Temp/python/in/CTR_RW_Map/GSBL/'

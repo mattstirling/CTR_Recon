@@ -17,7 +17,7 @@ def preprocess_header(name):
 
 #list files to upload
 db_path = 'C:/Users/mstirling/Desktop/Shared/CTR_Recon/SQL/CTR_Recon.db'
-in_list_file = 'C:/Users/mstirling/Desktop/Shared/CTR_Recon/OC 2016-01-18/SQL Files/Filename_SQLTable_Map.csv' 
+in_list_file = 'C:/Users/mstirling/Desktop/Shared/CTR_Recon/OC 2016-01-18/SQL Files/Filename_SQLTable_Map_v2.csv' 
 
 #common headers are in every SQL table
 common_headers = ['Source Name','File Date','File Name']
