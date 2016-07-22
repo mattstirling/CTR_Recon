@@ -3,7 +3,7 @@ Created on Feb 29, 2016
 
 @author: mstirling
 '''
-import paramiko, os, time
+import pysftp, os, time
 
 t1 = time.time()
 
@@ -18,6 +18,10 @@ this_username = f.readline().strip()
 this_pass = f.readline().strip()
 f.close()
 
+print this_host
+print this_username
+print this_pass
+
 #server folders
 out_folder = 'C:/Users/mstirling/Desktop/Shared/RW/'
 
@@ -25,20 +29,17 @@ out_folder = 'C:/Users/mstirling/Desktop/Shared/RW/'
 server_path_list = ['/opt/ctr/ctr/ctrapp/ctr/ctrarchive/outfiles/riskwatch/']
 public_local_map_list = [['/home/mstirl','home']]
 
+#filter data
+filter_filedate = '20160224'
+filter_systemname = 'ANVIL'
+
+
 #
 # main program
 #
 
-#get filenames from ctr unix server
-paramiko.util.log_to_file('ssh.log') #turns on logging for access the unix file using ssh/smtp
-
 #connect to the server
-ssh = paramiko.SSHClient() 
-ssh.load_system_host_keys()
-ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-ssh.connect(this_host, username=this_username, password=this_pass)
-stdin, stdout, stderr = ssh.exec_command('ls -l')
-sftp = ssh.open_sftp()
+sftp = pysftp.Connection(this_host, username=this_username, password=this_pass)
 
 for this_map in public_local_map_list:
     
@@ -51,17 +52,11 @@ for this_map in public_local_map_list:
     except:
         os.mkdir(out_folder + this_local)    
     
-    #get the files we are interested in
-    serverfile_list = sftp.listdir(path=this_public)
-    for server_file in serverfile_list:
-        sftp.get(this_public + str(server_file), out_folder + this_local + '/' + str(server_file))
-        
     sftp.get_r(this_public,out_folder + this_local, preserve_mtime = True)
 
 
     print 'done. from ' + this_public + ' to ' + out_folder + this_local
-
-
+    
+ 
 t2 = time.time()
 print 'total run = ' + str(t2-t1) + ' ms'
-                

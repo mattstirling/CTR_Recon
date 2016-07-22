@@ -16,8 +16,8 @@ def preprocess_header(name):
     return new_name
 
 #list files to upload
-db_path = 'C:/Users/mstirling/Desktop/Shared/CTR_Recon/SQL/CTR_Recon.db'
-in_list_file = 'C:/Users/mstirling/Desktop/Shared/CTR_Recon/OC 2016-01-18/SQL Files/Filename_SQLTable_Map_v2.csv' 
+db_path = 'C:/Users/mstirling/Desktop/Shared/CTR_Recon/SQL/CTR_Recon_2.db'
+in_list_file = 'C:/Users/mstirling/Desktop/Shared/CTR_Recon/OC 2016-01-18/SQL Files/Filename_SQLTable_Map.csv' 
 
 #common headers are in every SQL table
 common_headers = ['Source Name','File Date','File Name']
@@ -54,8 +54,11 @@ for file_table in in_list_pathnames:
         this_record.extend(line.strip().split(','))
         record_list.append(this_record)
     
+    print this_table_name
     SQL = 'insert into ' + this_table_name + ' values (' + ','.join(['?' for i in xrange(this_file_header_list_len + common_header_list_len)]) + ')'
     c.executemany(SQL, record_list)
     conn.commit()
 
-print 'done'            
+print 'done'
+print 'files from: ' +  in_list_file
+print 'to database table: ' + db_path            

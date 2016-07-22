@@ -5,8 +5,6 @@ Created on Feb 23, 2016
 '''
 import pandas as pd
 from OC_Map_Rules import OC_apply_map_rule
-#control variables
-bWriteReport = 1
 
 #in files
 in_folder = 'C:/Temp/python/in/CTR files/OC/'
