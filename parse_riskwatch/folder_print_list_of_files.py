@@ -5,7 +5,7 @@ mstirling
 '''
 
 b_write_to_txt = 1
-b_write_to_screen = 0
+b_write_to_screen = 1
 
 #import libraries
 import os
@@ -15,7 +15,7 @@ bListFiles = 1
 #in_folder = 'C:/Users/mstirling/Desktop/Shared/forTFRM/MMI 20160304/'
 #in_folder = 'C:/Temp/python/in/CTR Specs/'
 #in_folder = 'U:/CTR TFRM/Column Mapping from Ramesh/'
-in_folder = 'C:/Users/mstirling/Desktop/Shared/RW/VAR Session/market.16.06.14_try2/calibration/deals'
+in_folder = 'C:/Users/mstirling/Desktop/Shared/RW/Algo Session/dynamic.20160721/input/UDS'
 out_folder = 'C:/Temp/python/out/'
 out_file = 'CTR_file_list.txt'
 

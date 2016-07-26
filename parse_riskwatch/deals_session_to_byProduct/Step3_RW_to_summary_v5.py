@@ -3,11 +3,12 @@ Created on Jan 13, 2016
 
 @author: mstirling
 
-context: for some records, a vector of values populates within "one column for on one line" and syntax is roughly:
+context: for some records, a vector of values populates within "one cell" and syntax is roughly:
  ,A,B,C,"D1,D2,D3,D4",E,etc....
+ *"D1,D2,D3,D4" is the value in one cell
 
 for v3 of this file, we transform ,A,B,C,"D1,D2,D3,D4",E, into ,A,B,C,D1|D2|D3|D4,E,
-*we hope this won't cause further mistakes and confusion, but we can't be sure 
+*we hope this won't cause further mistakes and confusion, but we can't be sure
 
 *further context, we merge multi-row records into 1 record
  ,A,B,C,D1,E,etc....
@@ -18,6 +19,11 @@ for v3 of this file, we transform ,A,B,C,"D1,D2,D3,D4",E, into ,A,B,C,D1|D2|D3|D
  -->,A,B,C,D1|D2|D3|D4,E,
 
 v5 goal is to only point to a single folder as input
+
+**************************MANUAL STEP**************************
+v5 Manual step added:
+remove unwanted headers from "map_folder + map_file_name"
+ie. parent folder + 'all/ByProduct/out_header_type_filename_mapping.csv'
 
 '''
 import time, os
@@ -54,12 +60,18 @@ def preprocess_flename(name):
 #timing
 t1 = time.time()
 
-#main folder
-#parent_folder = 'C:/Users/mstirling/Desktop/Shared/RW/VAR Session/market.16.06.14/'
-#list_child_folder = ['asia','basemetals','corr','energy','ged','gef','mocatta','repo','southam','dpdef','investment']
-parent_folder = 'C:/Users/mstirling/Desktop/Shared/RW/VAR Session/market.16.06.14_try2/'
-list_child_folder = ['all']
+#reuse same code for both var and algo riskwatch session
+session = ['var','algo'][1]
 
+if session == 'var':
+    #main folder
+    parent_folder = 'C:/Users/mstirling/Desktop/Shared/RW/VAR Session/market.16.07.21/'
+
+elif session == 'algo':
+    #main folder
+    parent_folder = 'C:/Users/mstirling/Desktop/Shared/RW/Algo Session/dynamic.20160721/'
+
+list_child_folder = ['all']
 
 for child_folder in list_child_folder: 
     

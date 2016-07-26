@@ -17,8 +17,9 @@ for v3 of this file, we transform ,A,B,C,"D1,D2,D3,D4",E, into ,A,B,C,D1|D2|D3|D
  
  -->,A,B,C,D1|D2|D3|D4,E,
 
-v5 goal is to only point to a single folder as input
-
+****************************************************************************************
+Dependency: the below script must first be run:
+deals_session_to_byProduct.Step1_RW_deals_merge
 '''
 import time, pandas as pd, os
 
@@ -63,14 +64,15 @@ if bGetDataFromFiles:
     #main folder
     #parent_folder = 'C:/Users/mstirling/Desktop/Shared/RW/VAR Session/market.16.06.14/'
     #list_child_folder = ['asia','basemetals','corr','energy','ged','gef','mocatta','repo','southam','spread']
-    parent_folder = 'C:/Users/mstirling/Desktop/Shared/RW/VAR Session/market.16.06.14_try2/'
+    parent_folder = 'C:/Users/mstirling/Desktop/Shared/RW/VAR Session/market.16.07.21/'
     list_child_folder = ['all']
     in_file_list = ['deals.csv']
     in_file_audit_list = ['deals_audit.csv']
         
     #out folder
     out_folder = parent_folder + 'report/'
-    out_filename = 'out_' + time.strftime("%Y%m%d") + '_count_by_product.csv' 
+    #out_filename = 'out_' + time.strftime("%Y%m%d") + '_count_by_product.csv' 
+    out_filename = 'out_count_by_product.csv'
     
     #make sure we have the folder
     try:
@@ -180,10 +182,10 @@ if bGetDataFromFiles:
 
 if bCreateGroupByReport:
     
-    parent_folder = 'C:/Users/mstirling/Desktop/Shared/RW/VAR Session/market.16.06.14_try2/'
+    parent_folder = 'C:/Users/mstirling/Desktop/Shared/RW/VAR Session/market.16.07.21/'
     out_folder = parent_folder + 'report/'
     
-    in_file='out_20160628_count_by_product.csv'
+    in_file='out_count_by_product.csv'
     out_file = 'report_count_by_product_by_system.csv'
     
     #load data

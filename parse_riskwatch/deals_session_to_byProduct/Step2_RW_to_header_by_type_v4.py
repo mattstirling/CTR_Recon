@@ -6,6 +6,9 @@ Created on Jun 9, 2016
 update the process to point to 1 single folder as an input
 deals will always be in deals.csv
 
+Timing:
+VAR Riskwatch Session took 14 minutes to run this for 21-Jul-2016 data
+
 '''
 import time, os
 
@@ -25,12 +28,18 @@ t1 = time.time()
 #control variables
 b_write_headers_to_xls = 1
 
-#main folder (try1)
-#parent_folder = 'C:/Users/mstirling/Desktop/Shared/RW/VAR Session/market.16.06.14/'
-#list_child_folder = ['asia','basemetals','corr','energy','ged','gef','mocatta','repo','southam','dpdef','investment']
+#reuse same code for both var and algo riskwatch session
+session = ['var','algo'][1]
 
-#main folder (try2)
-parent_folder = 'C:/Users/mstirling/Desktop/Shared/RW/VAR Session/market.16.07.21/'
+if session == 'var':
+    #main folder
+    parent_folder = 'C:/Users/mstirling/Desktop/Shared/RW/VAR Session/market.16.07.21/'
+
+elif session == 'algo':
+    #main folder
+    parent_folder = 'C:/Users/mstirling/Desktop/Shared/RW/Algo Session/dynamic.20160721/'
+
+#previously we have many child folders in the VAR session. Now we create only 1 session for this data-profiling exercise
 list_child_folder = ['all']
 
 #out folder
@@ -58,6 +67,7 @@ for child_folder in list_child_folder:
     for in_file in in_file_list:
         with open(in_folder + in_file, 'r') as f_in:
             line_count = 0
+             
             for line in f_in:
                 line_count+=1
                 b_include_line = 1
@@ -126,4 +136,4 @@ for filename in in_file_list:
 print 'to ' + out_folder
   
 t2 = time.time()
-print 'total run = ' + str(t2-t1) + ' ms'
+print 'total run = ' + str(t2-t1) + ' s'
