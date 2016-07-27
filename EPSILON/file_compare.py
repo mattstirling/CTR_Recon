@@ -10,7 +10,7 @@ in_CTR_folder = 'C:/Users/mstirling/Desktop/Shared/RW/CTR Files/21-JUL-16/'
 in_CTR_file = 'out_EPSILON/' + 'out_TRS.csv'
 in_VAR_folder = 'C:/Users/mstirling/Desktop/Shared/RW/VAR Session/market.16.07.21/'
 in_VAR_file = 'recon/' + 'EPSILON_TRS.csv'
-out_file = 'out_EPSILON/' + 'out_compare_diff_EPSILON_TRS.csv'
+out_file = 'out_EPSILON/' + 'out_diff_by_cell_EPSILON_TRS.csv'
 
 #load data
 df_CTR = pd.read_csv(in_CTR_folder+in_CTR_file)
