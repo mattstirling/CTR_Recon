@@ -25,6 +25,7 @@ df_TRS = pd.read_csv(in_folder+in_file_TRS)
 
 #Merge 2 CTR files/dataframes into 1 file/dataframe
 df_merge = pd.concat([df_CTRS,df_TRS],axis=0)
+df_merge.reset_index(inplace=True)
 
 #apply mapping rules
 df_map = pd.read_csv(map_folder+map_file)

@@ -17,7 +17,8 @@ def apply_map_rule(value,rulename):
         elif rulename == 'round_to_2decimal':return round_to_2decimal(value)
         elif rulename == 'replace_bar_with_comma':return replace_bar_with_comma(value) 
         elif rulename == 'asset_reset_freq_remap':return asset_reset_freq_remap(value)
-        elif rulename == 'comma_list_of_num_add_10decimals':comma_list_of_num_add_10decimals(value)
+        elif rulename == 'comma_list_of_num_add_10decimals':return comma_list_of_num_add_10decimals(value)
+        elif rulename == 'add_colon':return add_colon(value)
         else: return 'rule not in if-else tree'
     except:
         return value
@@ -80,4 +81,7 @@ def comma_list_of_num_add_10decimals(value):
     #print comma_list_val
     return ', '.join([add_10decimals(i) for i in comma_list_val])
     
+def add_colon(value):
+    return ':' + str(value)
     
+       
