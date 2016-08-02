@@ -1,0 +1,29 @@
+Column Name,RW Map Rule,CTR Map Rule,RW Alias,Notes
+Name,remove_xcharlie,remove_objcharlie,,
+ID,remove_idxcharlie,remove_idobjcharlie,,
+Booking Point,,,,not_in_scope
+CSA Eligible,,,,not_in_scope
+Cards ID,,,,not_in_scope
+Facility ID,,,,not_in_scope
+GL Account,,,,not_in_scope
+GL Notional,,,,not_in_scope
+Include Notional,,,,not_in_scope
+Swap Pay Currency,,,,not_in_scope
+Swap Rec Currency,,,,not_in_scope
+Trading,,,,not_in_scope
+Pay NDF FX Reset Lag,,,,not_in_scope
+Rec NDF FX Reset Lag,,,,not_in_scope
+Pay NDF Settlement Currency,,,,not_in_scope
+Rec NDF Settlement Currency,,,,not_in_scope
+Pay NDF FX Reset Holiday,,,,not_in_scope
+Rec NDF FX Reset Holiday,,,,not_in_scope
+Pay NDF FX Reset Dates,,,,not_in_scope
+Rec NDF FX Reset Dates,,,,not_in_scope
+Pay NDF FX Reset Rates,,,,not_in_scope
+Rec NDF FX Reset Rates,,,,not_in_scope
+Currency,,,,already_known
+Issue Date,,,,already_known
+Rec Cashflows,,,,already_known
+Rec Discount Curve,,,,already_known
+Pay Cashflows,,,,already_known
+Pay Discount Curve,,,,already_known
