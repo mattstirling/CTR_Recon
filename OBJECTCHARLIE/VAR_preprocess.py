@@ -18,8 +18,8 @@ map_folder = ''
 map_file = 'map_OBJECTCHARLIE.csv'
 
 #out folder
-out_folder = in_folder + 'recon/'
-out_file_FX_Deals = 'OBJECTCHARLIE_FOREX.csv'
+out_folder = 'C:/Users/mstirling/Desktop/Shared/RW/CTR Files/21-JUL-16/' + 'out_OBJECTCHARLIE/'
+out_file_FX_Deals = 'out_OBJCHARLIE_FXFORWARD_VAR_preprocessed_file.csv'
 
 #open in_files
 df_FOREX = pd.read_csv(in_folder+in_file_FOREX)
@@ -28,6 +28,9 @@ df_FOREX = pd.read_csv(in_folder+in_file_FOREX)
 #filter 
 df_merge = df_FOREX[(df_FOREX.Filename.str.contains("/__bns__var_rw__data__riskwatch__charlie__"))&(df_FOREX.Name.str.contains("CHARLIE"))&(~df_FOREX.Name.str.contains("FX"))]
 #print len(df_TRS.index)
+
+print 'VAR num records: ' + str(len(df_merge.index))
+print 'VAR num columns: ' + str(len(df_merge.columns))
 
 #open mapping rules
 df_map = pd.read_csv(map_folder+map_file)

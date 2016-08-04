@@ -7,9 +7,9 @@ import pandas as pd, os, numpy as np
 
 #in files
 in_CTR_folder = 'C:/Users/mstirling/Desktop/Shared/RW/CTR Files/21-JUL-16/'
-in_CTR_file = 'out_OBJECTCHARLIE/' + 'out_FXFORWARD.csv'
-in_VAR_folder = 'C:/Users/mstirling/Desktop/Shared/RW/VAR Session/market.16.07.21/'
-in_VAR_file = 'recon/' + 'OBJECTCHARLIE_FOREX.csv'
+in_CTR_file = 'out_OBJECTCHARLIE/' + 'out_OBJCHARLIE_FXFORWARD_CTR_preprocessed_file.csv'
+in_VAR_folder = in_CTR_folder
+in_VAR_file = 'out_OBJECTCHARLIE/' + 'out_OBJCHARLIE_FXFORWARD_VAR_preprocessed_file.csv'
 out_file = 'out_OBJECTCHARLIE/' + 'out_compare_diff_OBJECTCHARLIE_FXFORWARD.csv'
 
 #load data
@@ -45,14 +45,18 @@ changed_index = [df_CTR.index[i] for i in difference_locations[0]]
 changed_col = [df_CTR.columns[i] for i in difference_locations[1]]
 df_diff = pd.DataFrame({'name':changed_index,'column':changed_col,'val_CTR': changed_CTR, 'val_VAR': changed_VAR})
 
+print 'num records match: ' + str(len(df_CTR.index))
+print 'num columns match: ' + str(len(df_CTR.columns))
+print 'num non-null cells to compare: ' + str(len(np.where((df_CTR.isnull() & df_VAR.isnull()))[0])) 
+print 'num cells diff: ' + str(len(df_diff.index)) 
+
 df_diff.to_csv(in_CTR_folder + out_file)
 
 print len(df_diff)
 
 df_group = df_diff.groupby(['column']).size()
-#print df_group
-print len(df_group)
 
+#print only a subset of the file
 #df_diff[df_diff.column=='Asset Notional'].to_csv(in_VAR_folder + out_VAR_file)
 
 print 'done.'

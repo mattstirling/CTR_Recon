@@ -27,7 +27,7 @@ map_file = 'map_OBJECTCHARLIE.csv'
 
 #out files
 out_folder = in_folder + 'out_OBJECTCHARLIE/'
-out_file = 'out_FXFORWARD.csv'
+out_file = 'out_OBJCHARLIE_FXFORWARD_CTR_preprocessed_file.csv'
 
 #open in_files
 df_CN = pd.read_csv(in_folder+in_file_CN)
@@ -49,6 +49,8 @@ df_merge.reset_index(inplace=True)
 
 df_merge = df_merge[(~df_merge['Maturity Date'].str.contains("2016/07/21"))]
 
+print 'CTR num records: ' + str(len(df_merge.index))
+print 'CTR num columns: ' + str(len(df_merge.columns))
 
 #apply mapping rules
 df_map = pd.read_csv(map_folder+map_file)
