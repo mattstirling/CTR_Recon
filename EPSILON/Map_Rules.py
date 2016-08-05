@@ -33,7 +33,7 @@ def remove_trailing_zero_from_gl_notional(value):
 def map_freq(value):
     dict_case = {
             'Mon': 'Month'
-            ,'Quarter':'QURT'
+            ,'QURT':'Quarter'
             }
     return dict_case.get(value,value)
 

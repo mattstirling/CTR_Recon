@@ -4,7 +4,7 @@ Created on Feb 23, 2016
 @author: mstirling
 '''
 import pandas as pd, os
-from Map_Rules import apply_map_rule
+from Map_Rules import apply_map_rule  # @UnresolvedImport
 
 #in CTR files
 in_folder = 'C:/Users/mstirling/Desktop/Shared/RW/CTR Files/21-JUL-16/'
