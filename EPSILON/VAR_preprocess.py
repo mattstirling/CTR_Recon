@@ -4,7 +4,7 @@ Created on Feb 23, 2016
 @author: mstirling
 '''
 import pandas as pd
-from Map_Rules import apply_map_rule
+from Map_Rules import apply_map_rule  # @UnresolvedImport
 
 #control variables
 bWriteReport = 1
@@ -14,20 +14,21 @@ in_folder = 'C:/Users/mstirling/Desktop/Shared/RW/VAR Session/market.16.07.21/'
 in_file_TRS = 'all/ByProduct/out_20160722_deals_BNS_Total_Return_Equity_Swap.csv' 
 
 #in CTR files
-map_folder = 'C:/Users/mstirling/Desktop/Shared/RW/CTR Files/21-JUL-16/'
-map_file = 'map/map_EPSILON.csv'
+map_folder = ''
+map_file = 'map_EPSILON.csv'
 
 #out folder
-out_folder = in_folder + 'recon/'
-out_file_FX_Deals = 'EPSILON_TRS.csv'
+out_folder = 'C:/Users/mstirling/Desktop/Shared/RW/CTR Files/21-JUL-16/' + 'out_EPSILON/'
+out_file_FX_Deals = 'out_EPSILON_VAR_preprocessed_file.csv'
 
 #open in_files
 df_TRS = pd.read_csv(in_folder+in_file_TRS)
-#print len(df_TRS.index)
 
 #filter 
 df_merge = df_TRS[(df_TRS.Filename == '/Sybase_Epsilon_processed.csv')&(df_TRS.Name.str.contains("EpsilonTRS"))]
-#print len(df_TRS.index)
+
+print 'VAR num records: ' + str(len(df_merge.index))
+print 'VAR num columns: ' + str(len(df_merge.columns))
 
 #open mapping rules
 df_map = pd.read_csv(map_folder+map_file)
@@ -41,6 +42,7 @@ for i in df_map[~df_map['RW Alias'].isnull()].index:
     
     #copy alias values to 'this_col'
     for j in df_merge[~df_merge[this_alias].isnull()].index:
+        pd.options.mode.chained_assignment = None  # default='warn'
         df_merge.at[j,this_col] = df_merge.at[j,this_alias] 
     
     #drop alias column
@@ -54,6 +56,7 @@ for i in df_map['Column Name'].index:
     #apply the mapping rule if rule 'not nan/blank'
     if not this_map_rule == 'nan':
         for j in df_merge.index:
+            pd.options.mode.chained_assignment = None  # default='warn'
             df_merge.at[j, this_col] = apply_map_rule(df_merge.at[j, this_col], this_map_rule) 
 
 #sort by Name

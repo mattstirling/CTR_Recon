@@ -3,8 +3,8 @@ Created on July 27, 2016
 
 @author: cnamgoong
 '''
-import numpy as np
-import re
+#import numpy as np
+#import re
 
 def apply_map_rule(value,rulename):
     
@@ -14,15 +14,10 @@ def apply_map_rule(value,rulename):
         elif rulename == 'remove_idxcharlie': return remove_idxcharlie(value)
         elif rulename == 'remove_idobjcharlie': return remove_idobjcharlie(value)
         elif rulename == 'not_in_scope': return not_in_scope(value)
-        elif rulename == 'already_known': return already_known(value)
         else: return 'rule not in if-else tree'
     except:
         return value
     
-def already_known(value):
-    value = None
-    return
-
 def remove_objcharlie(value):
     return str(value)[10:]
 

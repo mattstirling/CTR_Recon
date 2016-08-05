@@ -4,7 +4,7 @@ Created on July 27, 2016
 @author: cnamgoong
 '''
 import pandas as pd
-from Map_Rules import apply_map_rule
+from Map_Rules import apply_map_rule  # @UnresolvedImport
 
 #control variables
 bWriteReport = 1

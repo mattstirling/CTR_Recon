@@ -3,7 +3,7 @@ Created on July 28, 2016
 
 @author: cnamgoong
 '''
-import pandas as pd, os, numpy as np
+import pandas as pd, numpy as np
 
 #in files
 in_CTR_folder = 'C:/Users/mstirling/Desktop/Shared/RW/CTR Files/21-JUL-16/'
