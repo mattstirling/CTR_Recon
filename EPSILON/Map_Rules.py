@@ -51,11 +51,10 @@ def replace_bar_and_remove_trailing_zeros(value):
     temp_str = re.sub(r'-0[.]','-.',temp_str)           #remove leading zero
     temp_str = re.sub(r'(,\s0)+',r'',temp_str)          #5.6, 0, 0, 0 -> 5.6
     return temp_str
-    
+
 def replace_bar_with_comma(value):
     #actually replacing with "comma + space"
     return str(value).replace('|',', ')
-    
 
 def round_to_2decimal(value):
     return np.round(value,0)
@@ -80,5 +79,3 @@ def Y_to_true(value):
 
 def add_colon(value):
     return ':' + str(value)
-    
-       

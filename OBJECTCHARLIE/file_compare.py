@@ -6,7 +6,7 @@ Created on July 28, 2016
 import pandas as pd, numpy as np
 
 #in files
-in_CTR_folder = 'C:/Users/mstirling/Desktop/Shared/RW/CTR Files/21-JUL-16/'
+in_CTR_folder = 'C:/Users/mstirling/Desktop/Shared/RW/CTR Files/20160721_PRD/'
 in_CTR_file = 'out_OBJECTCHARLIE/' + 'out_OBJCHARLIE_FXFORWARD_CTR_preprocessed_file.csv'
 in_VAR_folder = in_CTR_folder
 in_VAR_file = 'out_OBJECTCHARLIE/' + 'out_OBJCHARLIE_FXFORWARD_VAR_preprocessed_file.csv'

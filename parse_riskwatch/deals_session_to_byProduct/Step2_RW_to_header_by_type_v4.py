@@ -29,11 +29,11 @@ t1 = time.time()
 b_write_headers_to_xls = 1
 
 #reuse same code for both var and algo riskwatch session
-session = ['var','algo'][1]
+session = ['var','algo'][0]
 
 if session == 'var':
     #main folder
-    parent_folder = 'C:/Users/mstirling/Desktop/Shared/RW/VAR Session/market.16.07.21/'
+    parent_folder = 'C:/Users/mstirling/Desktop/Shared/RW/VAR Session/market.16.08.12/'
 
 elif session == 'algo':
     #main folder

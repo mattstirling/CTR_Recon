@@ -18,7 +18,7 @@ map_folder = ''
 map_file = 'map_OBJECTCHARLIE.csv'
 
 #out folder
-out_folder = 'C:/Users/mstirling/Desktop/Shared/RW/CTR Files/21-JUL-16/' + 'out_OBJECTCHARLIE/'
+out_folder = 'C:/Users/mstirling/Desktop/Shared/RW/CTR Files/20160721_PRD/' + 'out_OBJECTCHARLIE/'
 out_file_FX_Deals = 'out_OBJCHARLIE_FXFORWARD_VAR_preprocessed_file.csv'
 
 #open in_files

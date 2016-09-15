@@ -19,9 +19,9 @@ t1 = time.time()
 session = ['var','algo'][0]
 
 if session == 'var':
-
+    
     #in folder + out folder
-    parent_folder = 'C:/Users/mstirling/Desktop/Shared/RW/VAR Session/market.16.07.21/'
+    parent_folder = 'C:/Users/mstirling/Desktop/Shared/RW/VAR Session/market.16.07.12/'
     in_folder_list = ['asia'
                       ,'corr'
                       ,'cva'

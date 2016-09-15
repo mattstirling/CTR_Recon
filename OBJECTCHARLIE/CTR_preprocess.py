@@ -7,7 +7,7 @@ import pandas as pd, os
 from Map_Rules import apply_map_rule  # @UnresolvedImport
 
 #in CTR files
-in_folder = 'C:/Users/mstirling/Desktop/Shared/RW/CTR Files/21-JUL-16/'
+in_folder = 'C:/Users/mstirling/Desktop/Shared/RW/CTR Files/20160721_PRD/'
 in_file_CN = 'OBJECTCHARLIE/OBJCHARLIECN_FX_Forward_D_20160721_1_RiskWatch.csv'
 in_file_GZ = 'OBJECTCHARLIE/OBJCHARLIEGZ_FX_Forward_D_20160721_1_RiskWatch.csv'
 in_file_HK = 'OBJECTCHARLIE/OBJCHARLIEHK_FX_Forward_D_20160721_1_RiskWatch.csv'

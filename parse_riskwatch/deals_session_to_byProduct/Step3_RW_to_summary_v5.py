@@ -25,6 +25,9 @@ v5 Manual step added:
 remove unwanted headers from "map_folder + map_file_name"
 ie. parent folder + 'all/ByProduct/out_header_type_filename_mapping.csv'
 
+
+***took 28 minutes to run on 8-Aug-2016 VAR session
+
 '''
 import time, os
 
@@ -61,11 +64,11 @@ def preprocess_flename(name):
 t1 = time.time()
 
 #reuse same code for both var and algo riskwatch session
-session = ['var','algo'][1]
+session = ['var','algo'][0]
 
 if session == 'var':
     #main folder
-    parent_folder = 'C:/Users/mstirling/Desktop/Shared/RW/VAR Session/market.16.07.21/'
+    parent_folder = 'C:/Users/mstirling/Desktop/Shared/RW/VAR Session/market.16.08.12/'
 
 elif session == 'algo':
     #main folder
