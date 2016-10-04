@@ -29,6 +29,10 @@ out_file = config.get('filename','out_file_VAR')
 df_Fra = pd.read_csv(in_folder+in_file_Fra)
 #print len(df_TRS.index)
 
+#convert all columns to str
+for col in df_Fra.columns:
+     df_Fra[col] = df_Fra[col].astype(str) 
+
 #filter 
 file_list_in_scope = ['/__bns__derivProdData__riskWatch__EQUITYFIO__ALL__Sybase_K2.csv'
                       ,'/__bns__derivProdData__riskWatch__EQUITYFSO__ALL__Sybase_K2.csv'

@@ -92,3 +92,5 @@ print 'done.'
 print 'done. write from ' + in_CTR_folder + in_CTR_file
 print 'done. write from ' + in_VAR_folder + in_VAR_file
 print 'done. write to ' + in_CTR_folder
+
+print df_diff[df_diff.column.isin(['Payment Holiday'])].head(10)

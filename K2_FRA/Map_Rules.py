@@ -18,15 +18,14 @@ def apply_map_rule(value,rulename):
         elif rulename == 'not_in_scope': return not_in_scope(value)        
         elif rulename == 'varstr_rate' : return varstr_rate(value)
         elif rulename == 'round_notional' : return round_notional(value)
-        elif rulename == 'prod_type' : return prod_type(value)
         elif rulename == 'ctrstr_rate' : return ctrstr_rate(value)
-        elif rulename == 'placeholder' : return 'FRA' #placeholder(value)
+        elif rulename == 'placeholder' : return placeholder(value)
         elif rulename == 'name_change' : return name_change(value)
         elif rulename == 'id_change' : return id_change(value)
         elif rulename == 'contract_size' : return 1
         elif rulename == 'holiday_sort_alphaorder' : return holiday_sort_alphaorder(value)
-        elif rulename == 'map_to_buysell': return map_to_buysell(value)
-        elif rulename == 'map_to_YN':return map_to_YN(value)
+        elif rulename == 'map_to_buysell' : return map_to_buysell(value)
+        elif rulename == 'map_to_YN' : return map_to_YN(value)
         else: return 'rule not in if-else tree'
     except:
         return value
@@ -52,6 +51,7 @@ def name_change(value):
     return val
 
 def round_notional(value):
+    return value
     amount = str(value)[:-3]
     amount = amount.split(".")[0]
     return amount.strip()
@@ -65,10 +65,6 @@ def ctrstr_rate(value):
     perc = val.split(" %")[0]
     new_perc = round(perc, 6)
     return new_perc + " % ANNU"
-
-def prod_type(value):
-    val = float('FALSE')
-    return val
 
 def placeholder(value):
     val = value + 'FRA'
