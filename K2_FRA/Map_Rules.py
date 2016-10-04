@@ -21,9 +21,35 @@ def apply_map_rule(value,rulename):
         elif rulename == 'prod_type' : return prod_type(value)
         elif rulename == 'ctrstr_rate' : return ctrstr_rate(value)
         elif rulename == 'placeholder' : return 'FRA' #placeholder(value)
+        elif rulename == 'name_change' : return name_change(value)
+        elif rulename == 'id_change' : return id_change(value)
+        elif rulename == 'contract_size' : return 1
+        elif rulename == 'holiday_sort_alphaorder' : return holiday_sort_alphaorder(value)
+        elif rulename == 'map_to_buysell': return map_to_buysell(value)
+        elif rulename == 'map_to_YN':return map_to_YN(value)
         else: return 'rule not in if-else tree'
     except:
         return value
+
+def holiday_sort_alphaorder(value):
+    val = str(value).strip()
+    #print "Old Value -----> " + val
+    val = val.replace(";",",")
+    val = val.split(",")
+    hol = sorted(val)
+    hol = ';'.join(hol)
+    #print "New Value -----> " + hol
+    return hol
+
+def id_change(value):
+    val = value.strip()
+    val = val.split(".")[1]
+    return ":" + val
+
+def name_change(value):
+    val = value.strip()
+    val = val.split(".")[1]
+    return val
 
 def round_notional(value):
     amount = str(value)[:-3]
@@ -69,11 +95,28 @@ def change_flag(value):
                 }
     return dict_case.get(value,value)
 
+def map_to_buysell(value):
+    value = str(value.strip())
+    dict_case = {
+                '-1' : 'Sell'
+                ,'1' : 'Buy'
+                }
+    return dict_case.get(value,value)
+
 def boolean_maker(value):
     flag = str(value).strip()
     dict_case = {
                  'N' : 'False'
                  ,'Y' : 'True'
+                 }
+    new_flag = dict_case.get(flag,flag)
+    return new_flag
+
+def map_to_YN(value):
+    flag = str(value).strip()
+    dict_case = {
+                 'False':'N' 
+                 ,'True':'Y'
                  }
     new_flag = dict_case.get(flag,flag)
     return new_flag

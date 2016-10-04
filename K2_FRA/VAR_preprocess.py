@@ -3,23 +3,27 @@ Created on Aug 10, 2016
 
 @author: cnamgoong
 '''
-import pandas as pd
+import pandas as pd, ConfigParser
 from Map_Rules import apply_map_rule
 
 #control variables
 bWriteReport = 1
 
+#open config file
+config = ConfigParser.ConfigParser()
+config.read('config.ini')
+
 #in VAR files
-in_folder = 'C:/Users/cnamgoong/Desktop/Shared/RW/VAR Session/market.16.08.22/'
-in_file_Fra = 'all/ByProduct/out_20160822_deals_BNS_Fra.csv' 
+in_folder = config.get('filename','in_folder_VAR')
+in_file_Fra = config.get('filename','in_file_VAR')
 
 #in mapping rule files
-map_folder = 'C:/Users/cnamgoong/Desktop/Shared/RW/CTR Files/2016-08-22-PROD/'
-map_file = 'map/map_K2_Fra.csv'
+map_folder = config.get('filename','in_folder_map')
+map_file = config.get('filename','in_file_map')
 
 #out folder
-out_folder = map_folder
-out_file_Fra_Deals =  'out_K2/' + 'out_K2_Fra_VAR_preprocessed_file.csv'
+out_folder = config.get('filename','out_folder')
+out_file = config.get('filename','out_file_VAR')
 
 #open in_files
 df_Fra = pd.read_csv(in_folder+in_file_Fra)
@@ -82,7 +86,7 @@ for i in df_map['Column Name'].index:
 df_merge.sort('Name', inplace = True)
 
 #write out_files
-df_merge.to_csv(out_folder + out_file_Fra_Deals,index=False)
+df_merge.to_csv(out_folder + out_file,index=False)
 
 print 'done.'
 print 'from ' + in_folder

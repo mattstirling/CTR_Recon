@@ -25,28 +25,11 @@ session = ['var','algo'][0]
 if session == 'var':
 
     #in folder + out folder
-    parent_folder = 'C:/Users/mstirling/Desktop/Shared/RW/VAR Session/market.16.08.12/'
+    parent_folder = 'C:/Users/mstirling/Desktop/Shared/RW/VAR Session/market.16.09.27/'
     in_folder = parent_folder + 'calibration/deals'
     out_folder = parent_folder + 'all/'
     out_file = 'deals.csv'
     out_audit_file = 'deals_audit.csv'
-    
-    #filter 
-    file_list_in_scope = (['__bns__derivProdData__riskWatch__EMERGINGMEX__MXN__Sybase_K2.csv'
-                          ,'__bns__derivProdData__riskWatch__EMERGINGMKT__MXN__Sybase_K2.csv'
-                          ,'__bns__derivProdData__riskWatch__LDNINFLATION__EUR__Sybase_K2.csv'
-                          ,'__bns__derivProdData__riskWatch__LDNOPTIONS__EUR__Sybase_K2.csv'
-                          ,'__bns__derivProdData__riskWatch__LDNOPTIONS__GBP__Sybase_K2.csv'
-                          ,'__bns__derivProdData__riskWatch__LDNOPTIONS__USD__Sybase_K2.csv'
-                          ,'__bns__derivProdData__riskWatch__MEXJV__MXN__Sybase_K2.csv'
-                          ,'__bns__derivProdData__riskWatch__MEXJV__USD__Sybase_K2.csv'
-                          ,'__bns__derivProdData__riskWatch__MEXTREASURY__MXN__Sybase_K2.csv'
-                          ,'__bns__derivProdData__riskWatch__MEXTREASURY__USD__Sybase_K2.csv'
-                          ,'__bns__derivProdData__riskWatch__NYDERIV__USD__Sybase_K2.csv'
-                          ,'__bns__derivProdData__riskWatch__NYOPTIONS__USD__Sybase_K2.csv'
-                          ,'__bns__derivProdData__riskWatch__RETAIL__ALL__Sybase_K2.csv'
-                          ,'__bns__derivProdData__riskWatch__STRUCTURED__ALL__Sybase_K2.csv'
-                          ,'__bns__derivProdData__riskWatch__TORUSFI__USD__Sybase_K2.csv'])
     
     list_filenames_to_skip = (['__bns__derivProdData__riskWatch__Mocatta__baseMetals__RW__deals__day1__Counterparty_static.csv',
                                '__bns__derivProdData__riskWatch__Mocatta__baseMetals__RW__deals__day1__baseMetals_MTM.csv',
@@ -54,8 +37,8 @@ if session == 'var':
                                '__bns__var_rw__data__riskwatch__adpim__adp_isin_tor.csv',
                                '__bns__var_rw__data__riskwatch__adpim__adp_warrant_scusa.csv',
                                '__bns__var_rw__data__riskwatch__adpim__adp_warrant_tor.csv',
-                               '__bns__var_rw__storage__position__inverlat__mdpraptipobase.csv.20160812.0',
-                               '__bns__var_rw__storage__position__inverlat__tesoreria_md_tipobase.csv.20160812.0',
+                               '__bns__var_rw__storage__position__inverlat__mdpraptipobase.csv.20160927.0',
+                               '__bns__var_rw__storage__position__inverlat__tesoreria_md_tipobase.csv.20160927.0',
                                '__bns__var_rw__data__riskwatch__costa_rica__exceptions_costa_rica.csv'])
 
 elif session == 'algo':
@@ -86,8 +69,8 @@ for (dirpath, dirnames, filenames) in os.walk(in_folder):
     this_dirpath = dirpath.replace('\\','/')
     this_dir = dirpath[len(in_folder):].replace('\\','/')
     
-    #for filename in [f for f in filenames if f not in list_filenames_to_skip]:
-    for filename in [f for f in filenames if f in file_list_in_scope]:
+    for filename in [f for f in filenames if f not in list_filenames_to_skip]:
+    #for filename in [f for f in filenames if f in file_list_in_scope]:
         #only grab files with the inclusion date
         #if included_date in filename:
         #CTR_filelist.extend(filename)

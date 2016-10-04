@@ -3,20 +3,24 @@ Created on Aug 23, 2016
 
 @author: cnamgoong
 '''
-import pandas as pd, os
+import pandas as pd, os, ConfigParser
 from Map_Rules import apply_map_rule
 
+#open config file
+config = ConfigParser.ConfigParser()
+config.read('config.ini')
+
 #in CTR files
-in_folder = 'C:/Users/mstirling/Desktop/Shared/RW/CTR Files/20160815_DEV/'
-in_file_Fra = 'K2/K2_Forward_Rate_Agreement_D_20160830_30_RiskWatch.csv'
+in_folder = config.get('filename','in_folder_CTR')
+in_file_Fra = config.get('filename','in_file_CTR')
 
 #in map files
-map_folder = ''
-map_file = 'map_K2_Fra.csv'
+map_folder = config.get('filename','in_folder_map')
+map_file = config.get('filename','in_file_map')
 
 #out files
-out_folder = in_folder + 'out_K2/'
-out_file = 'out_K2_Fra_CTR_preprocessed_file.csv'
+out_folder = config.get('filename','out_folder')
+out_file = config.get('filename','out_file_CTR')
 
 #open in_files
 df_K2 = pd.read_csv(in_folder+in_file_Fra)
@@ -26,7 +30,7 @@ df_merge = pd.concat([df_K2],axis=0)
 df_merge.reset_index(inplace=True,drop=True)
 
 #drop the deals with Issue Date = File Creation Date
-df_merge = df_merge[(~df_merge['Issue Date'].str.contains("2016/08/22"))]
+df_merge = df_merge[(~df_merge['Issue Date'].str.contains("2016/09/27"))]
 
 #reorder columns
 df_merge.sort_index(axis=1,inplace=True)
@@ -44,6 +48,7 @@ for i in df_map['Column Name'].index:
 
 #sort the CTR dataframe by Name
 sort_col = 'Name'
+
 
 #write out_files
 try: os.stat(out_folder[:-1])

@@ -33,7 +33,7 @@ session = ['var','algo'][0]
 
 if session == 'var':
     #main folder
-    parent_folder = 'C:/Users/mstirling/Desktop/Shared/RW/VAR Session/market.16.08.12/'
+    parent_folder = 'C:/Users/mstirling/Desktop/Shared/RW/VAR Session/market.16.09.27/'
 
 elif session == 'algo':
     #main folder

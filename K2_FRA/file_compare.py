@@ -3,13 +3,17 @@ Created on Aug 10, 2016
 
 @author: cnamgoong
 '''
-import pandas as pd, os, numpy as np
+import pandas as pd, os, numpy as np, ConfigParser
+
+#open config file
+config = ConfigParser.ConfigParser()
+config.read('config.ini')
 
 #in files
-in_CTR_folder = 'C:/Users/cnamgoong/Desktop/Shared/RW/CTR Files/2016-08-22-PROD/'
-in_CTR_file = 'out_K2/' + 'out_K2_Fra_CTR_preprocessed_file.csv'
-in_VAR_folder = 'C:/Users/cnamgoong/Desktop/Shared/RW/CTR Files/2016-08-04-PROD/'
-in_VAR_file = 'out_K2/' + 'out_K2_Fra_VAR_preprocessed_file.csv'
+in_CTR_folder = config.get('filename','out_folder')
+in_CTR_file = config.get('filename','out_file_CTR')
+in_VAR_folder = config.get('filename','out_folder')
+in_VAR_file = config.get('filename','out_file_VAR')
 
 #load data
 df_CTR = pd.read_csv(in_CTR_folder+in_CTR_file)
@@ -18,10 +22,10 @@ print len(df_CTR.columns)
 print len(df_VAR.columns)
 
 #out files
-out_file_diff = 'out_K2/' + 'out_K2_Fra_diff.csv'
-out_file_inVAR_notCTR = 'out_K2/' + 'out_K2_Fra_inVAR_notCTR.csv'
-out_file_inCTR_notVAR = 'out_K2/' + 'out_K2_Fra_inCTR_notVAR.csv'
-out_file_columns_diff = 'out_K2/' + 'out_K2_Fra_diff_columns_diff.csv'
+out_file_diff = config.get('filename','out_file_diff')
+out_file_inVAR_notCTR = config.get('filename','out_file_inVAR_notCTR')
+out_file_inCTR_notVAR = config.get('filename','out_file_inCTR_notVAR')
+out_file_columns_diff = config.get('filename','out_file_columns_diff')
 
 #output missing rows
 df_diff = df_CTR[~np.in1d(df_CTR['Name'],df_VAR['Name'])]
@@ -36,8 +40,6 @@ df_VAR_col = pd.DataFrame({'in_VAR':['Y' for col in df_VAR.columns]},index=df_VA
 df_merge_col = pd.concat([df_CTR_col,df_VAR_col],axis=1)
 df_merge_col.sort_index(axis=1,inplace=True)
 df_merge_col.to_csv(in_CTR_folder + out_file_columns_diff)
-
-
 
 #drop any rows that are not in common
 df_CTR = df_CTR[np.in1d(df_CTR['Name'],df_VAR['Name'])]
