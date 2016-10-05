@@ -19,7 +19,6 @@ def apply_map_rule(value,rulename):
         elif rulename == 'varstr_rate' : return varstr_rate(value)
         elif rulename == 'round_notional' : return round_notional(value)
         elif rulename == 'ctrstr_rate' : return ctrstr_rate(value)
-        elif rulename == 'placeholder' : return placeholder(value)
         elif rulename == 'name_change' : return name_change(value)
         elif rulename == 'id_change' : return id_change(value)
         elif rulename == 'contract_size' : return 1
@@ -65,10 +64,6 @@ def ctrstr_rate(value):
     perc = val.split(" %")[0]
     new_perc = round(perc, 6)
     return new_perc + " % ANNU"
-
-def placeholder(value):
-    val = value + 'FRA'
-    return val
 
 def varstr_rate(value):
     val = str(value).strip()

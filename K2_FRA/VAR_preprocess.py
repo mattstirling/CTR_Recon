@@ -4,7 +4,7 @@ Created on Aug 10, 2016
 @author: cnamgoong
 '''
 import pandas as pd, ConfigParser
-from Map_Rules import apply_map_rule
+from Map_Rules import apply_map_rule #@UnresolvedImport
 
 #control variables
 bWriteReport = 1

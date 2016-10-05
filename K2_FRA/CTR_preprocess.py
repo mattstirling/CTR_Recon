@@ -4,7 +4,7 @@ Created on Aug 23, 2016
 @author: cnamgoong
 '''
 import pandas as pd, os, ConfigParser
-from Map_Rules import apply_map_rule
+from Map_Rules import apply_map_rule #@UnresolvedImport
 
 #open config file
 config = ConfigParser.ConfigParser()
