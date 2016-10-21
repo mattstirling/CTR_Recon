@@ -3,30 +3,32 @@ Created on July 27, 2016
 
 @author: cnamgoong
 '''
-import pandas as pd
+import pandas as pd, ConfigParser
 from Map_Rules import apply_map_rule  # @UnresolvedImport
 
-#control variables
-bWriteReport = 1
+#open config file
+config = ConfigParser.ConfigParser()
+config.read('config.ini')
 
 #in VAR files
-in_folder = 'C:/Users/mstirling/Desktop/Shared/RW/VAR Session/market.16.07.21/'
-in_file_FOREX = 'all/ByProduct/out_20160722_deals_BNS_Forex.csv' 
+in_folder = config.get('filename','in_folder_VAR')
+in_file_FOREX = config.get('filename','in_file_VAR')
 
 #in CTR files
-map_folder = ''
-map_file = 'map_OBJECTCHARLIE.csv'
+map_folder = config.get('filename','in_folder_map')
+map_file = config.get('filename','in_file_map')
 
 #out folder
-out_folder = 'C:/Users/mstirling/Desktop/Shared/RW/CTR Files/20160721_PRD/' + 'out_OBJECTCHARLIE/'
-out_file_FX_Deals = 'out_OBJCHARLIE_FXFORWARD_VAR_preprocessed_file.csv'
+out_folder = config.get('filename','out_folder')
+out_file = config.get('filename','out_file_VAR')
 
 #open in_files
 df_FOREX = pd.read_csv(in_folder+in_file_FOREX)
 #print len(df_TRS.index)
 
 #filter 
-df_merge = df_FOREX[(df_FOREX.Filename.str.contains("/__bns__var_rw__data__riskwatch__charlie__"))&(df_FOREX.Name.str.contains("CHARLIE"))&(~df_FOREX.Name.str.contains("FX"))]
+df_merge = df_FOREX
+#df_merge = df_FOREX[(df_FOREX.Filename.str.contains("/__bns__var_rw__data__riskwatch__charlie__"))&(df_FOREX.Name.str.contains("CHARLIE"))&(~df_FOREX.Name.str.contains("FX"))]
 #print len(df_TRS.index)
 
 print 'VAR num records: ' + str(len(df_merge.index))
@@ -63,7 +65,7 @@ for i in df_map['Column Name'].index:
 df_merge.sort('Name', inplace = True)
 
 #write out_files
-df_merge.to_csv(out_folder + out_file_FX_Deals,index=False)
+df_merge.to_csv(out_folder + out_file,index=False)
 
 print 'done.'
 print 'from ' + in_folder

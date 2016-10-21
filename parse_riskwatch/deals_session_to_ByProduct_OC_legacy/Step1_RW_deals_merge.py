@@ -23,22 +23,14 @@ t1 = time.time()
 session = ['var','algo'][0]
 
 if session == 'var':
-
     #in folder + out folder
-    parent_folder = 'C:/Users/mstirling/Desktop/Shared/RW/VAR Session/market.16.10.18/'
-    in_folder = parent_folder + 'calibration/deals'
-    out_folder = parent_folder + 'all/'
+    parent_folder = 'C:/Users/mstirling/Desktop/Shared/RW/VAR Session/market.16.10.19/'
+    in_folder = parent_folder + 'calibration_OC_legacy/'
+    out_folder = parent_folder + 'all_OC_legacy/'
     out_file = 'deals.csv'
     out_audit_file = 'deals_audit.csv'
+    list_filenames_to_skip = ['']
     
-    list_filenames_to_skip = (['__bns__derivProdData__riskWatch__Mocatta__baseMetals__RW__deals__day1__Counterparty_static.csv',
-                               '__bns__derivProdData__riskWatch__Mocatta__baseMetals__RW__deals__day1__baseMetals_MTM.csv',
-                               '__bns__var_rw__data__riskwatch__adpim__adp_isin_scusa.csv',
-                               '__bns__var_rw__data__riskwatch__adpim__adp_isin_tor.csv',
-                               '__bns__var_rw__data__riskwatch__adpim__adp_warrant_scusa.csv',
-                               '__bns__var_rw__data__riskwatch__adpim__adp_warrant_tor.csv',
-                               '__bns__var_rw__data__riskwatch__costa_rica__exceptions_costa_rica.csv'])
-
 elif session == 'algo':
     
     #in folder + out folder

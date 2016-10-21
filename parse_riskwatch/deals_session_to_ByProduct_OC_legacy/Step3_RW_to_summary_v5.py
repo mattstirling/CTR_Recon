@@ -68,13 +68,13 @@ session = ['var','algo'][0]
 
 if session == 'var':
     #main folder
-    parent_folder = 'C:/Users/mstirling/Desktop/Shared/RW/VAR Session/market.16.10.18/'
+    parent_folder = 'C:/Users/mstirling/Desktop/Shared/RW/VAR Session/market.16.10.19/'
 
 elif session == 'algo':
     #main folder
     parent_folder = 'C:/Users/mstirling/Desktop/Shared/RW/Algo Session/dynamic.20160721/'
 
-list_child_folder = ['all']
+list_child_folder = ['all_OC_legacy']
 
 for child_folder in list_child_folder: 
     

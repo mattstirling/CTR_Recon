@@ -1,24 +1,10 @@
 '''
-Created on July 27, 2016
+Created on Feb 23, 2016
 
-@author: cnamgoong
+@author: mstirling
 '''
-import pandas as pd, os, ConfigParser,re
+import pandas as pd, os, ConfigParser, re
 from Map_Rules import apply_map_rule  # @UnresolvedImport
-
-def get_first_OBJCHARLIEIN_filename(filelist):
-    #want the lower version number of the OBJCHARLIEIN_ file
-    match_version_list = []
-    match_file_list = []
-    
-    for f in filelist:
-        match = re.search(r'OBJCHARLIEIN_FX_Forward_D_[0-9]{8}_([0-9]+)_RiskWatch.csv', f)
-        if match:
-            match_version_list.append(int(match.group(1)))
-            match_file_list.append(f)
-    
-    if len(match_version_list) > 0:
-        return match_file_list[match_version_list.index(min(match_version_list))]
 
 def filename_to_RWyyyymmdd(filename):
     match = re.search(r'.*_D_([0-9]{4})([0-9]{2})([0-9]{2})_.*',filename)
@@ -39,18 +25,14 @@ map_file = config.get('filename','in_file_map')
 out_folder = config.get('filename','out_folder')
 out_file = config.get('filename','out_file_CTR')
 
-#get list of in_files for OBJCHARLIE
-#want only OBJCHARLIE files
-#want only _FX_Forward_D_ and _NDF_D_
-#want the lower version number of the OBJCHARLIEIN_ file
+#get list of in_files
+#want only ANVIL repo files + Impact triparty files
+#want only _Repo_Reverse_Repo_D_
 all_filenames = [f for f in os.listdir(in_folder) if os.path.isfile(os.path.join(in_folder, f))]
 in_filenames = ([f for f in all_filenames 
                   if f[-4:] == '.csv'
-                  and f[:10] == 'OBJCHARLIE' 
-                  and ('_FX_Forward_D_' in f or '_NDF_D_' in f)
-                  and 'OBJCHARLIEIN' not in f])
-#want the lower version number of the OBJCHARLIEIN_ file
-in_filenames.append(get_first_OBJCHARLIEIN_filename(all_filenames))
+                  and (f[:5] == 'ANVIL' or f[:6] == 'IMPACT')  
+                  and ('_Repo_Reverse_Repo_D_' in f)])
 
 #prefix the directory
 in_filenames = [in_folder + f for f in in_filenames]
@@ -66,10 +48,13 @@ df_merge.reset_index(inplace=True)
 
 #filter on the maturity date
 business_date = filename_to_RWyyyymmdd(in_filenames[0])
-#df_merge = df_merge[(~df_merge['Maturity Date'].str.contains(business_date))]
+df_merge = df_merge[(~df_merge['Maturity Date'].str.contains(business_date))]
 
 print 'CTR num records: ' + str(len(df_merge.index))
 print 'CTR num columns: ' + str(len(df_merge.columns))
+
+#reorder columns
+df_merge.sort_index(axis=1,inplace=True)
 
 #apply mapping rules
 df_map = pd.read_csv(map_folder+map_file)
@@ -80,15 +65,10 @@ for i in df_map['Column Name'].index:
     #apply the mapping rule if rule 'not nan/blank'
     if not this_map_rule == 'nan':
         for j in df_merge.index:
-            df_merge.at[j, this_col] = apply_map_rule(df_merge.at[j, this_col], this_map_rule)
-            if(this_col == 'Include Notional'):
-                print "VALUE ::  >>>> ", df_merge.at[j, this_col]
-            
-            #print j 
+            df_merge.at[j, this_col] = apply_map_rule(df_merge.at[j, this_col], this_map_rule) 
 
 #sort the CTR dataframe by Name
 sort_col = 'Name'
-df_merge.sort(sort_col, inplace = True)
 
 #write out_files
 try: os.stat(out_folder[:-1])
@@ -100,3 +80,5 @@ df_merge.to_csv(out_folder + out_file,index=False)
 print 'done.'
 print 'from ' + in_folder
 print 'to ' + out_folder
+
+

@@ -1,8 +1,8 @@
 Column Name,RW Map Rule,CTR Map Rule,RW Alias
 Name,right7,right7,
-*Theoretical Model,,add_colon,
+*Theoretical Model,,,
 Buy,,,
-FI Discount Curve,,add_colon,
+FI Discount Curve,,,
 FI Reset Freq,,,
 FI Value Only,,,
 Maturity Date,,,

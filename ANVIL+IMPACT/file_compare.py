@@ -1,15 +1,19 @@
 '''
-Created on Jul 25, 2016
+Created on July 28, 2016
 
-@author: mstirling
+@author: cnamgoong
 '''
-import pandas as pd, os, numpy as np
+import pandas as pd, numpy as np, ConfigParser
+
+#open config file
+config = ConfigParser.ConfigParser()
+config.read('config.ini')
 
 #in files
-in_CTR_folder = 'C:/Users/mstirling/Desktop/Shared/RW/CTR Files/21-JUL-16/'
-in_CTR_file = 'out_ANVIL/' + 'out_ANVIL_Repo_CTR_preprocessed_file.csv'
-in_VAR_folder = 'C:/Users/mstirling/Desktop/Shared/RW/CTR Files/21-JUL-16/'
-in_VAR_file = 'out_ANVIL/' + 'out_ANVIL_Repo_VAR_preprocessed_file.csv'
+in_CTR_folder = config.get('filename','out_folder')
+in_CTR_file = config.get('filename','out_file_CTR')
+in_VAR_folder = config.get('filename','out_folder')
+in_VAR_file = config.get('filename','out_file_VAR')
 
 #load data
 df_CTR = pd.read_csv(in_CTR_folder+in_CTR_file)
@@ -18,10 +22,10 @@ print len(df_CTR.columns)
 print len(df_VAR.columns)
 
 #out files
-out_file_diff = 'out_ANVIL/' + 'out_ANVIL_Repo_diff.csv'
-out_file_inVAR_notCTR = 'out_ANVIL/' + 'out_ANVIL_Repo_inVAR_notCTR.csv'
-out_file_inCTR_notVAR = 'out_ANVIL/' + 'out_ANVIL_Repo_inCTR_notVAR.csv'
-out_file_columns_diff = 'out_ANVIL/' + 'out_ANVIL_Repo_diff_columns_diff.csv'
+out_file_diff = config.get('filename','out_file_diff')
+out_file_inVAR_notCTR = config.get('filename','out_file_inVAR_notCTR')
+out_file_inCTR_notVAR = config.get('filename','out_file_inCTR_notVAR')
+out_file_columns_diff = config.get('filename','out_file_columns_diff')
 
 #output missing rows
 df_diff = df_CTR[~np.in1d(df_CTR['Name'],df_VAR['Name'])]
