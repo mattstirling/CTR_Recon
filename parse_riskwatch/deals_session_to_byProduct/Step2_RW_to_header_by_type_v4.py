@@ -33,14 +33,14 @@ session = ['var','algo'][0]
 
 if session == 'var':
     #main folder
-    parent_folder = 'C:/Users/mstirling/Desktop/Shared/RW/VAR Session/market.16.10.18/'
+    parent_folder = 'C:/Users/mstirling/Desktop/Shared/RW/VAR Session/market.16.10.11/'
 
 elif session == 'algo':
     #main folder
     parent_folder = 'C:/Users/mstirling/Desktop/Shared/RW/Algo Session/dynamic.20160721/'
 
 #previously we have many child folders in the VAR session. Now we create only 1 session for this data-profiling exercise
-list_child_folder = ['all_OC_legacy']
+list_child_folder = ['all']
 
 #out folder
 out_header_filename = 'out_type_list.txt'

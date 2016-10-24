@@ -25,7 +25,7 @@ session = ['var','algo'][0]
 if session == 'var':
 
     #in folder + out folder
-    parent_folder = 'C:/Users/mstirling/Desktop/Shared/RW/VAR Session/market.16.10.18/'
+    parent_folder = 'C:/Users/mstirling/Desktop/Shared/RW/VAR Session/market.16.10.11/'
     in_folder = parent_folder + 'calibration/deals'
     out_folder = parent_folder + 'all/'
     out_file = 'deals.csv'
@@ -37,6 +37,8 @@ if session == 'var':
                                '__bns__var_rw__data__riskwatch__adpim__adp_isin_tor.csv',
                                '__bns__var_rw__data__riskwatch__adpim__adp_warrant_scusa.csv',
                                '__bns__var_rw__data__riskwatch__adpim__adp_warrant_tor.csv',
+                               '__bns__var_rw__storage__position__inverlat__mdpraptipobase.csv.20160811.0',
+                               '__bns__var_rw__storage__position__inverlat__tesoreria_md_tipobase.csv.20160811.0',
                                '__bns__var_rw__data__riskwatch__costa_rica__exceptions_costa_rica.csv'])
 
 elif session == 'algo':

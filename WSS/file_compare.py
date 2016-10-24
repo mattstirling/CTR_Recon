@@ -18,8 +18,10 @@ in_VAR_file = config.get('filename','out_file_VAR')
 #load data
 df_CTR = pd.read_csv(in_CTR_folder+in_CTR_file)
 df_VAR = pd.read_csv(in_VAR_folder+in_VAR_file)
-print len(df_CTR.columns)
-print len(df_VAR.columns)
+print 'CTR num records: ' + str(len(df_CTR.index))
+print 'VAR num records: ' + str(len(df_VAR.index))
+print 'CTR num cols: ' + str(len(df_CTR.columns))
+print 'VAR num cols: ' + str(len(df_VAR.columns))
 
 #out files
 out_file_diff = config.get('filename','out_file_diff')
@@ -44,15 +46,15 @@ df_merge_col.to_csv(in_CTR_folder + out_file_columns_diff)
 #drop any rows that are not in common
 df_CTR = df_CTR[np.in1d(df_CTR['Name'],df_VAR['Name'])]
 df_VAR = df_VAR[np.in1d(df_VAR['Name'],df_CTR['Name'])]
-print len(df_CTR.columns)
-print len(df_VAR.columns)
+#print len(df_CTR.columns)
+#print len(df_VAR.columns)
 
 #drop any columns that are not in common
 common_cols = [col for col in df_CTR.columns if col in df_VAR.columns]
 df_CTR.drop(labels=[col for col in df_CTR.columns if col not in common_cols],axis=1,inplace=True)
 df_VAR.drop(labels=[col for col in df_VAR.columns if col not in common_cols],axis=1,inplace=True)
-print len(df_CTR.columns)
-print len(df_VAR.columns)
+#print len(df_CTR.columns)
+#print len(df_VAR.columns)
 
 #set index to Name
 df_CTR.set_index('Name',inplace=True)

@@ -1,27 +1,33 @@
 '''
-Created on Aug 12, 2016
+Created on July 28, 2016
 
 @author: cnamgoong
 '''
-import pandas as pd, os, numpy as np
+import pandas as pd, numpy as np, ConfigParser
+
+#open config file
+config = ConfigParser.ConfigParser()
+config.read('config.ini')
 
 #in files
-in_CTR_folder = 'C:/Users/mstirling/Desktop/Shared/RW/CTR Files/20160812_DEV/'
-in_CTR_file = 'out_K2/' + 'out_K2_CapFloor_CTR_preprocessed_file.csv'
-in_VAR_folder = 'C:/Users/mstirling/Desktop/Shared/RW/CTR Files/20160812_DEV/'
-in_VAR_file = 'out_K2/' + 'out_K2_CapFloor_VAR_preprocessed_file.csv'
+in_CTR_folder = config.get('filename','out_folder')
+in_CTR_file = config.get('filename','out_file_CTR')
+in_VAR_folder = config.get('filename','out_folder')
+in_VAR_file = config.get('filename','out_file_VAR')
 
 #load data
 df_CTR = pd.read_csv(in_CTR_folder+in_CTR_file)
 df_VAR = pd.read_csv(in_VAR_folder+in_VAR_file)
-print len(df_CTR.columns)
-print len(df_VAR.columns)
+print 'CTR num records: ' + str(len(df_CTR.index))
+print 'VAR num records: ' + str(len(df_VAR.index))
+print 'CTR num cols: ' + str(len(df_CTR.columns))
+print 'VAR num cols: ' + str(len(df_VAR.columns))
 
 #out files
-out_file_diff = 'out_K2/' + 'out_K2_CapFloor_diff.csv'
-out_file_inVAR_notCTR = 'out_K2/' + 'out_K2_CapFloor_inVAR_notCTR.csv'
-out_file_inCTR_notVAR = 'out_K2/' + 'out_K2_CapFloor_inCTR_notVAR.csv'
-out_file_columns_diff = 'out_K2/' + 'out_K2_CapFloor_diff_columns_diff.csv'
+out_file_diff = config.get('filename','out_file_diff')
+out_file_inVAR_notCTR = config.get('filename','out_file_inVAR_notCTR')
+out_file_inCTR_notVAR = config.get('filename','out_file_inCTR_notVAR')
+out_file_columns_diff = config.get('filename','out_file_columns_diff')
 
 #output missing rows
 df_diff = df_CTR[~np.in1d(df_CTR['Name'],df_VAR['Name'])]
@@ -37,20 +43,18 @@ df_merge_col = pd.concat([df_CTR_col,df_VAR_col],axis=1)
 df_merge_col.sort_index(axis=1,inplace=True)
 df_merge_col.to_csv(in_CTR_folder + out_file_columns_diff)
 
-
-
 #drop any rows that are not in common
 df_CTR = df_CTR[np.in1d(df_CTR['Name'],df_VAR['Name'])]
 df_VAR = df_VAR[np.in1d(df_VAR['Name'],df_CTR['Name'])]
-print len(df_CTR.columns)
-print len(df_VAR.columns)
+#print len(df_CTR.columns)
+#print len(df_VAR.columns)
 
 #drop any columns that are not in common
 common_cols = [col for col in df_CTR.columns if col in df_VAR.columns]
 df_CTR.drop(labels=[col for col in df_CTR.columns if col not in common_cols],axis=1,inplace=True)
 df_VAR.drop(labels=[col for col in df_VAR.columns if col not in common_cols],axis=1,inplace=True)
-print len(df_CTR.columns)
-print len(df_VAR.columns)
+#print len(df_CTR.columns)
+#print len(df_VAR.columns)
 
 #set index to Name
 df_CTR.set_index('Name',inplace=True)
