@@ -1,13 +1,10 @@
 '''
-Created on Aug 10, 2016
+Created on Feb 23, 2016
 
-@author: cnamgoong
+@author: mstirling
 '''
 import pandas as pd, ConfigParser
-from Map_Rules import apply_map_rule #@UnresolvedImport
-
-#control variables
-bWriteReport = 1
+from Map_Rules import apply_map_rule  # @UnresolvedImport
 
 #open config file
 config = ConfigParser.ConfigParser()
@@ -15,9 +12,9 @@ config.read('config.ini')
 
 #in VAR files
 in_folder = config.get('filename','in_folder_VAR')
-in_file_Fra = config.get('filename','in_file_VAR')
+in_file = config.get('filename','in_file_VAR')
 
-#in mapping rule files
+#in CTR files
 map_folder = config.get('filename','in_folder_map')
 map_file = config.get('filename','in_file_map')
 
@@ -26,33 +23,19 @@ out_folder = config.get('filename','out_folder')
 out_file = config.get('filename','out_file_VAR')
 
 #open in_files
-df_Fra = pd.read_csv(in_folder+in_file_Fra)
+in_df = pd.read_csv(in_folder+in_file)
 #print len(df_TRS.index)
 
-#convert all columns to str
-for col in df_Fra.columns:
-     df_Fra[col] = df_Fra[col].astype(str) 
+#include all records from a K2 file
+df_merge = in_df[(in_df.Filename.str.contains('Sybase_K2.csv'))]
 
-#filter 
-file_list_in_scope = ['/__bns__derivProdData__riskWatch__EQUITYFIO__ALL__Sybase_K2.csv'
-                      ,'/__bns__derivProdData__riskWatch__EQUITYFSO__ALL__Sybase_K2.csv'
-                      ,'/__bns__derivProdData__riskWatch__EQUITYILN__ALL__Sybase_K2.csv'
-                      ,'/__bns__derivProdData__riskWatch__EQUITYSPI__ALL__Sybase_K2.csv'
-                      ,'/__bns__derivProdData__riskWatch__EQUITYSPS__ALL__Sybase_K2.csv'
-                      ,'/__bns__derivProdData__riskWatch__EQUITYSP__ALL__Sybase_K2.csv'
-                      ,'/__bns__derivProdData__riskWatch__EQUITYSSO__ALL__Sybase_K2.csv'
-                      ,'/__bns__derivProdData__riskWatch__LDNCCS__EUR__Sybase_K2.csv'
-                      ,'/__bns__derivProdData__riskWatch__LDNCCS__GBP__Sybase_K2.csv'
-                      ,'/__bns__derivProdData__riskWatch__LDNCCS__USD__Sybase_K2.csv'
-                      ,'/__bns__derivProdData__riskWatch__LDNEURSWAP__EUR__Sybase_K2.csv'
-                      ,'/__bns__derivProdData__riskWatch__LDNGBPSWAP__GBP__Sybase_K2.csv'
-                      ,'/__bns__derivProdData__riskWatch__LDNINFLATION__GBP__Sybase_K2.csv'
-                      ,'/__bns__derivProdData__riskWatch__NYDERIV__USD__Sybase_K2.csv'
-                      ,'/__bns__derivProdData__riskWatch__NYIRSWAP__USD__Sybase_K2.csv'
-                      ,'/__bns__derivProdData__riskWatch__NYOISHEDGE__USD__Sybase_K2.csv'
-                      ,'/__bns__derivProdData__riskWatch__RETAIL__ALL__Sybase_K2.csv'
-                      ,'/__bns__derivProdData__riskWatch__SWAPS_BOOK__USD__Sybase_K2.csv']
-df_merge = df_Fra[(df_Fra.Filename.isin(file_list_in_scope))]
+#remove all placeholder deals
+#df_merge = df_merge[~(df_merge['Placeholder'] == True)]
+
+#remove duplicates by id, take the alpha-first filename
+df_merge = df_merge.sort('Filename').drop_duplicates(subset=['ID'], take_last=True)
+
+
 df_merge.reset_index(inplace=True,drop=True)
 print len(df_merge.index)
 

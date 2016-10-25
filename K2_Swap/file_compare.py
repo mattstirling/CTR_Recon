@@ -25,6 +25,7 @@ print 'VAR num cols: ' + str(len(df_VAR.columns))
 
 #out files
 out_file_diff = config.get('filename','out_file_diff')
+out_file_diff_first100 = config.get('filename','out_file_diff_first100')
 out_file_inVAR_notCTR = config.get('filename','out_file_inVAR_notCTR')
 out_file_inCTR_notVAR = config.get('filename','out_file_inCTR_notVAR')
 out_file_columns_diff = config.get('filename','out_file_columns_diff')
@@ -83,9 +84,13 @@ print 'num cells diff: ' + str(len(df_diff.index))
 
 df_diff.to_csv(in_CTR_folder + out_file_diff)
 
-print len(df_diff)
+df_list = []
+for col in df_diff.column.unique():
+    df_list.append(df_diff[df_diff.column == col].head(100))
+df_diff_first100 = pd.concat(df_list,axis=0) 
+df_diff_first100.to_csv(in_CTR_folder + out_file_diff_first100)
 
-df_group = df_diff.groupby(['column']).size()
+#df_group = df_diff.groupby(['column']).size()
 
 #print only a subset of the file
 #df_diff[df_diff.column=='Asset Notional'].to_csv(in_VAR_folder + out_VAR_file)

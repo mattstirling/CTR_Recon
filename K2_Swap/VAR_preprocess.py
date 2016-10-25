@@ -29,6 +29,12 @@ in_df = pd.read_csv(in_folder+in_file)
 #include all records from a K2 file
 df_merge = in_df[(in_df.Filename.str.contains('Sybase_K2.csv'))]
 
+#remove all placeholder deals
+#df_merge = df_merge[~(df_merge['Placeholder'] == True)]
+
+#remove Cross-currency deals and funding tickets
+
+
 #remove duplicates by id, take the alpha-first filename
 df_merge = df_merge.sort('Filename').drop_duplicates(subset=['ID'], take_last=True)
 

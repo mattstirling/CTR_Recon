@@ -20,13 +20,9 @@ def apply_map_rule(value,rulename):
         elif rulename == 'ctr_id_changer' : return ctr_id_changer(value)
         elif rulename == 'ctr_daycount_changer' : return ctr_daycount_changer(value)
         elif rulename == 'remove_K2prefix_pluspostfix_R': return remove_K2prefix_pluspostfix_R(value)
-        elif rulename == 'remove_K2prefix': return remove_K2prefix(value)
         else: return 'rule not in if-else tree'
     except:
         return value
-
-def remove_K2prefix (value):
-    return str(value)[3:]
 
 def remove_K2prefix_pluspostfix_R(value):
     return str(value)[3:] + 'R'
