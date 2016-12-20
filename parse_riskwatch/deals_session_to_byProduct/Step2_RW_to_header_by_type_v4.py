@@ -10,7 +10,7 @@ Timing:
 VAR Riskwatch Session took 14 minutes to run this for 21-Jul-2016 data
 
 '''
-import time, os
+import time, os, ConfigParser
 
 def line_to_list(line):
     return line.strip().split(',')
@@ -22,22 +22,25 @@ def preprocess_flename(name):
         new_name = new_name.replace(item[0],item[1])
     return new_name
 
-#time
+#timing
 t1 = time.time()
+
+#open config file
+config = ConfigParser.ConfigParser()
+config.read('config.ini')
+
+#in folder
+parent_folder = config.get('filename','parent_folder')
 
 #control variables
 b_write_headers_to_xls = 1
 
-#reuse same code for both var and algo riskwatch session
-session = ['var','algo'][0]
-
-if session == 'var':
-    #main folder
-    parent_folder = 'C:/Users/mstirling/Desktop/Shared/RW/VAR Session/market.16.10.24/'
-
-elif session == 'algo':
-    #main folder
-    parent_folder = 'C:/Users/mstirling/Desktop/Shared/RW/Algo Session/dynamic.20160721/'
+non_BNS_headers_in_scope = (['Cash Instrument'
+                            ,'CurveSurface'
+                            ,'Foreign Exchange'
+                            ,'Matrix Parameter Curve'
+                            ,'Position'
+                            ,'Position Lite'])
 
 #previously we have many child folders in the VAR session. Now we create only 1 session for this data-profiling exercise
 list_child_folder = ['all']
@@ -76,11 +79,15 @@ for child_folder in list_child_folder:
                 if line[:8].lower() == ',default': b_include_line = 0
                 if line[:1] =='#': b_include_line = 0
                 if b_include_line: 
+                    
                     #case: NOT leading comma. we think this is a header
                     if not line[:1] ==',':
                         line_split_to_list = line_to_list(line)
                         this_header_type = line_split_to_list[0] 
-                        set_header_type.add(this_header_type)
+                        
+                        #add the header if it begins with BNS or is in the "in scope" list
+                        if this_header_type[:4] == 'BNS ' or this_header_type in non_BNS_headers_in_scope:
+                            set_header_type.add(this_header_type)
                         #print str(this_header_type) + ', ' + str(line_count)
             f_in.close()
     

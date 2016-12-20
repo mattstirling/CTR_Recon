@@ -20,9 +20,13 @@ def apply_map_rule(value,rulename):
         elif rulename == 'comma_list_of_num_add_10decimals':return comma_list_of_num_add_10decimals(value)
         elif rulename == 'add_colon':return add_colon(value)
         elif rulename == 'right7':return right7(value)
+        elif rulename == 'remove_systemprefix':return remove_systemprefix(value)
         else: return 'rule not in if-else tree'
     except:
         return value
+
+def remove_systemprefix(value):
+    return str(value).strip().split('.')[1]
 
 def right7(value):
     return str(value)[-7:]

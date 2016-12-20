@@ -1,31 +1,34 @@
 '''
-Created on Jul 25, 2016
+Created on July 28, 2016
 
-@author: mstirling
+@author: cnamgoong
 '''
-import pandas as pd, numpy as np
+import pandas as pd, numpy as np, ConfigParser
+
+#open config file
+config = ConfigParser.ConfigParser()
+config.read('config.ini')
 
 #in files
-in_CTR_folder = 'C:/Users/mstirling/Desktop/Shared/RW/CTR Files/21-JUL-16/'
-in_CTR_file = 'out_EPSILON/' + 'out_EPSILON_CTR_preprocessed_file.csv'
-in_VAR_folder = in_CTR_folder
-in_VAR_file = 'out_EPSILON/' + 'out_EPSILON_VAR_preprocessed_file.csv'
-
-#out files
-out_file_diff = 'out_EPSILON/' + 'out_EPSILON_TRS_diff.csv'
-out_file_inVAR_notCTR = 'out_EPSILON/' + 'out_EPSILON_TRS_inVAR_notCTR.csv'
-out_file_inCTR_notVAR = 'out_EPSILON/' + 'out_EPSILON_TRS_inCTR_notVAR.csv'
-out_file_columns_diff = 'out_EPSILON/' + 'out_EPSILON_TRS_columns_diff.csv'
+in_CTR_folder = config.get('filename','out_folder')
+in_CTR_file = config.get('filename','out_file_CTR')
+in_VAR_folder = config.get('filename','out_folder')
+in_VAR_file = config.get('filename','out_file_VAR')
 
 #load data
 df_CTR = pd.read_csv(in_CTR_folder+in_CTR_file)
 df_VAR = pd.read_csv(in_VAR_folder+in_VAR_file)
+print 'CTR num records: ' + str(len(df_CTR.index))
+print 'VAR num records: ' + str(len(df_VAR.index))
+print 'CTR num cols: ' + str(len(df_CTR.columns))
+print 'VAR num cols: ' + str(len(df_VAR.columns))
 
-#num columns and rows before dropping
-print len(df_CTR.columns)
-print len(df_VAR.columns)
-print len(df_CTR.index)
-print len(df_VAR.index)
+#out files
+out_file_diff = config.get('filename','out_file_diff')
+out_file_diff_first100 = config.get('filename','out_file_diff_first100')
+out_file_inVAR_notCTR = config.get('filename','out_file_inVAR_notCTR')
+out_file_inCTR_notVAR = config.get('filename','out_file_inCTR_notVAR')
+out_file_columns_diff = config.get('filename','out_file_columns_diff')
 
 #output missing rows
 df_diff = df_CTR[~np.in1d(df_CTR['Name'],df_VAR['Name'])]
@@ -44,11 +47,15 @@ df_merge_col.to_csv(in_CTR_folder + out_file_columns_diff)
 #drop any rows that are not in common
 df_CTR = df_CTR[np.in1d(df_CTR['Name'],df_VAR['Name'])]
 df_VAR = df_VAR[np.in1d(df_VAR['Name'],df_CTR['Name'])]
+#print len(df_CTR.columns)
+#print len(df_VAR.columns)
 
 #drop any columns that are not in common
 common_cols = [col for col in df_CTR.columns if col in df_VAR.columns]
 df_CTR.drop(labels=[col for col in df_CTR.columns if col not in common_cols],axis=1,inplace=True)
 df_VAR.drop(labels=[col for col in df_VAR.columns if col not in common_cols],axis=1,inplace=True)
+#print len(df_CTR.columns)
+#print len(df_VAR.columns)
 
 #set index to Name
 df_CTR.set_index('Name',inplace=True)
@@ -77,7 +84,16 @@ print 'num cells diff: ' + str(len(df_diff.index))
 
 df_diff.to_csv(in_CTR_folder + out_file_diff)
 
-print len(df_diff)
+df_list = []
+for col in df_diff.column.unique():
+    df_list.append(df_diff[df_diff.column == col].head(100))
+df_diff_first100 = pd.concat(df_list,axis=0) 
+df_diff_first100.to_csv(in_CTR_folder + out_file_diff_first100)
+
+#df_group = df_diff.groupby(['column']).size()
+
+#print only a subset of the file
+#df_diff[df_diff.column=='Asset Notional'].to_csv(in_VAR_folder + out_VAR_file)
 
 print 'done.'
 print 'done. write from ' + in_CTR_folder + in_CTR_file

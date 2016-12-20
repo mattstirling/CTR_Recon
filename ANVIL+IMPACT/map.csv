@@ -1,5 +1,5 @@
 Column Name,RW Map Rule,CTR Map Rule,RW Alias
-Name,right7,right7,
+Name,,remove_systemprefix,
 *Theoretical Model,,,
 Buy,,,
 FI Discount Curve,,,

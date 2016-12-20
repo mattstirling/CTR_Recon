@@ -29,7 +29,8 @@ ie. parent folder + 'all/ByProduct/out_header_type_filename_mapping.csv'
 ***took 28 minutes to run on 8-Aug-2016 VAR session
 
 '''
-import time, os
+#import libraries
+import os, time, ConfigParser
 
 def line_to_list(line):
 #for v3 of this file, we transform ,A,B,C,"D1,D2,D3,D4",E, into ,A,B,C,D1|D2|D3|D4,E,
@@ -63,16 +64,12 @@ def preprocess_flename(name):
 #timing
 t1 = time.time()
 
-#reuse same code for both var and algo riskwatch session
-session = ['var','algo'][0]
+#open config file
+config = ConfigParser.ConfigParser()
+config.read('config.ini')
 
-if session == 'var':
-    #main folder
-    parent_folder = 'C:/Users/mstirling/Desktop/Shared/RW/VAR Session/market.16.10.24/'
-
-elif session == 'algo':
-    #main folder
-    parent_folder = 'C:/Users/mstirling/Desktop/Shared/RW/Algo Session/dynamic.20160721/'
+#in folder
+parent_folder = config.get('filename','parent_folder')
 
 list_child_folder = ['all']
 

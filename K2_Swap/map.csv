@@ -1,2 +1,6 @@
 Column Name,RW Map Rule,CTR Map Rule,RW Alias,Notes
 Name,,ctr_to_var_name,,
+Mutual Puts,replace_bar_with_comma_space,,,
+Pay Applied Period Dates,replace_bar_with_comma_space,,,
+Pay Fees,replace_bar_with_comma_space,,,
+Pay Payment Dates,replace_bar_with_comma_space,,,

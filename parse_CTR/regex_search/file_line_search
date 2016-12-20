@@ -1,0 +1,19 @@
+
+this_trade_id = 'SS3006'
+
+#in folder
+in_folder = 'C:/Users/mstirling/Desktop/'
+in_file = 'K2_CM_Swap_D_20161201_01.csv'
+
+start_line = 550000
+end_line = 600000
+
+out_folder = 'C:/Temp/python/out/'
+out_file = in_file[:-4] + '_' + 
+f_out = open(out_folder + out_file,'w')
+
+with open(in_folder + in_file,'r+') as f:
+    data = mmap.mmap(f.fileno(), 0)
+    for i in re.findall(r'[PC],.*' + this_trade_id + '.*\n', data):
+        print i.strip()
+        f_out.write(i)

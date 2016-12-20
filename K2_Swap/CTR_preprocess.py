@@ -32,7 +32,8 @@ all_filenames = [f for f in os.listdir(in_folder) if os.path.isfile(os.path.join
 in_filenames = ([f for f in all_filenames 
                   if f[-4:] == '.csv'
                   and (f[:2] == 'K2')  
-                  and ('_Interest_Rate_Swap_D_' in f)])
+                  and ('_Interest_Rate_Swap_D_' in f
+                       or '_Inflation_Linked_Swap_D_' in f )])
 
 #prefix the directory
 in_filenames = [in_folder + f for f in in_filenames]

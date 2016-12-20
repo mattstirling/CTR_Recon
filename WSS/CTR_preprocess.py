@@ -32,7 +32,14 @@ all_filenames = [f for f in os.listdir(in_folder) if os.path.isfile(os.path.join
 in_filenames = ([f for f in all_filenames 
                   if f[-4:] == '.csv'
                   and (f[:3] == 'WSS')  
-                  and ('_FX_Spot_D_' in f or '_FX_Forward_D_' in f)])
+                  and ('_DRA_D_' in f
+                       or '_DRO_D_' in f
+                       or '_FX_Forward_D_' in f
+                       or '_FX_Spot_D_' in f
+                       or '_FX_Swap_D_' in f
+                       or '_NDF_D_' in f
+                       or '_NDFF_D_' in f
+                       )])
 
 #prefix the directory
 in_filenames = [in_folder + f for f in in_filenames]
@@ -44,7 +51,10 @@ for f in in_filenames:
 
 #merge all dataframes into 1
 df_merge = pd.concat(df_list,axis=0)     
-df_merge.reset_index(inplace=True)
+df_merge.reset_index(inplace=True,drop=True)
+
+#remove duplicates
+df_merge = df_merge.drop_duplicates(subset=['ID'], take_last=True)
 
 #filter on the maturity date
 business_date = filename_to_RWyyyymmdd(in_filenames[0])

@@ -10,6 +10,7 @@ def apply_map_rule(value,rulename):
     
     try:
         if rulename == 'change_flag': return change_flag(value)
+        elif rulename == 'replace_bar_with_comma_space' : return replace_bar_with_comma_space(value)
         elif rulename == 'boolean_maker': return boolean_maker(value)
         elif rulename == 'pay_holiday' : return pay_holiday(value)
         elif rulename == 'not_in_scope': return not_in_scope(value)        
@@ -22,6 +23,9 @@ def apply_map_rule(value,rulename):
         else: return 'rule not in if-else tree'
     except:
         return value
+
+def replace_bar_with_comma_space(value):
+    return str(value).replace('|',', ')
 
 def ctr_id_changer(value):
     val = str(value).strip()

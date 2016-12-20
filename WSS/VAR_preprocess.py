@@ -28,6 +28,9 @@ in_df = pd.read_csv(in_folder+in_file)
 
 df_merge = in_df[(in_df.Filename.str.contains('fx__Sybase_WSS_FX'))]
 
+#remove duplicates by id, take the alpha-first filename
+df_merge = df_merge.sort('Filename').drop_duplicates(subset=['ID'], take_last=True)
+
 df_merge.reset_index(inplace=True,drop=True)
 print len(df_merge.index)
 

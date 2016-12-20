@@ -46,8 +46,8 @@ df_merge_col.to_csv(in_CTR_folder + out_file_columns_diff)
 #drop any rows that are not in common
 df_CTR = df_CTR[np.in1d(df_CTR['Name'],df_VAR['Name'])]
 df_VAR = df_VAR[np.in1d(df_VAR['Name'],df_CTR['Name'])]
-#print len(df_CTR.columns)
-#print len(df_VAR.columns)
+print len(df_CTR.index)
+print len(df_VAR.index)
 
 #drop any columns that are not in common
 common_cols = [col for col in df_CTR.columns if col in df_VAR.columns]
