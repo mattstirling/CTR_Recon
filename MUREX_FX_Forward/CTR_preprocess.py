@@ -16,6 +16,8 @@ config.read('config.ini')
 
 #in folder
 in_folder = config.get('filename','in_folder_CTR')
+in_file = config.get('filename','in_file_CTR')
+
 
 #in map files
 map_folder = config.get('filename','in_folder_map')
@@ -28,11 +30,16 @@ out_file = config.get('filename','out_file_CTR')
 #get list of in_files
 #want only ANVIL repo files + Impact triparty files
 #want only _Repo_Reverse_Repo_D_
-all_filenames = [f for f in os.listdir(in_folder) if os.path.isfile(os.path.join(in_folder, f))]
+#all_filenames = [f for f in os.listdir(in_folder) if os.path.isfile(os.path.join(in_folder, f))]
+'''
 in_filenames = ([f for f in all_filenames 
                   if f[-4:] == '.csv'
                   and (f[:2] == 'K2')  
-                  and ('_Equity_OptionOTC_D_' in f)])
+                  and ('K2_Funding_Ticket_D_' in f)])
+'''
+in_filenames = []
+in_filenames.append(in_file)
+
 #No good way to filter out the K2_Bermuda_Swap_Option_D_ files
 
 #prefix the directory
@@ -41,6 +48,7 @@ in_filenames = [in_folder + f for f in in_filenames]
 #open each file into a dataframe (all have same header)
 df_list = []
 for f in in_filenames:
+    print f
     df_list.append(pd.read_csv(f))
 
 #merge all dataframes into 1
@@ -81,5 +89,3 @@ df_merge.to_csv(out_folder + out_file,index=False)
 print 'done.'
 print 'from ' + in_folder
 print 'to ' + out_folder
-
-

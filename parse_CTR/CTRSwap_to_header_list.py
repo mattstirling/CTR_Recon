@@ -11,11 +11,12 @@ import os, time, re
 t1 = time.time()
 
 #in folder + out folder
-main_folder = 'C:/Users/mstirling/Desktop/Shared/RW/CTR Files/20160912_Inbound/'
-in_folder = main_folder + 'K2/'
-out_folder = main_folder + 'K2_out/'  
-in_file = 'K2_CM_Swap_D_20160912_02' + '.csv'
-out_file = 'out_' 'K2_CM_Swap_D_20160912_02' + '_HeaderList' + '.txt'
+#in folder
+in_folder = 'C:/Users/mstirling/Desktop/Shared/RW/CTR Files/RW_ECR_Release_10/CTR_input_files_used/K2/'
+#in_folder = 'C:/Users/mstirling/Desktop/CTR_out_RW_ECR9/in files/'
+out_folder = in_folder + 'by_vector/'  
+in_file = 'K2_CM_Swap_D_20170110_01.csv'
+out_file = 'out_header_list.txt'
 
 #make sure we have the folder
 try:

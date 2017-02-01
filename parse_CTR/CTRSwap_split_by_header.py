@@ -16,12 +16,14 @@ import os, time, re
 t1 = time.time()
 
 #in folder + out folder
-main_folder = 'C:/Users/mstirling/Desktop/Shared/RW/CTR Files/20160912_Inbound/'
-in_folder = main_folder + 'K2/'
-out_folder = main_folder + 'K2_out/'  
-in_file = 'K2_CM_Swap_D_20160912_02' + '.csv'
-in_file_header_list = 'out_' 'K2_CM_Swap_D_20160912_02' + '_HeaderList' + '.txt'
-
+#in folder + out folder
+#in folder
+in_folder = 'C:/Users/mstirling/Desktop/Shared/RW/CTR Files/RW_ECR_Release_10/CTR_input_files_used/K2/'
+#in_folder = 'C:/Users/mstirling/Desktop/CTR_out_RW_ECR9/in files/'
+out_folder = in_folder + 'by_vector/'  
+in_file = 'K2_CM_Swap_D_20170110_01.csv'
+in_file_header_list = 'out_header_list.txt'
+ 
 #make sure we have the output folder
 try:
     os.stat(out_folder[:-1])
@@ -42,7 +44,7 @@ for header in header_list:
     #get header length, header filename, and open the file for output
     header_len = len(header)
     header_for_filename = re.sub(r'[, .:]',r'_',header)    
-    out_file = 'out_' 'K2_CM_Swap_D_20160912_02' + '_' + header_for_filename + '.csv'
+    out_file = 'out_Swap_' + header_for_filename + '.csv'
     f_out = open(out_folder + out_file,'w')     
     
     for line in open(in_folder + in_file,'r'):

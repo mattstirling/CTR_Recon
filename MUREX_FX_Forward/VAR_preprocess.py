@@ -27,7 +27,8 @@ in_df = pd.read_csv(in_folder+in_file)
 #print len(df_TRS.index)
 
 #include all records from a K2 file
-df_merge = in_df[(in_df.Filename.str.contains('_derivProdData_'))]
+#df_merge = in_df[(in_df.Filename.str.contains('_derivProdData_'))]
+df_merge = in_df
 
 #remove all placeholder deals
 #df_merge = df_merge[~(df_merge['Placeholder'] == True)]
@@ -36,7 +37,7 @@ df_merge = in_df[(in_df.Filename.str.contains('_derivProdData_'))]
 
 
 #remove duplicates by id, take the alpha-first filename
-df_merge = df_merge.sort('Filename').drop_duplicates(subset=['ID'], take_last=True)
+#df_merge = df_merge.sort('Filename').drop_duplicates(subset=['ID'], take_last=True)
 
 
 df_merge.reset_index(inplace=True,drop=True)
