@@ -6,20 +6,8 @@ Created on Dec 23, 2016
 
 import glob2, mmap, re, os
 
-def file_len(fname):
-    with open(fname) as f:
-        for i, l in enumerate(f):
-            pass
-    return i + 1
-
-def write_riskwatch_errors(f_in_riskwatch,f_out_err):
-    data = mmap.mmap(f_in_riskwatch.fileno(), 0)
-    for i in re.findall(r'[PC],.*Err_.*\n', data):
-        print i.strip()
-        f_out.write(i)
-    
 #in
-this_folder = 'C:/Users/mstirling/Desktop/Shared/RW/CTR Files/RW_ECR_Release_11/CTR_out_files/' 
+this_folder = 'C:\Users\mstirling\Desktop\Shared\RW\CTR Files/2017-02-28-PRD/riskwatch_x/'.replace('\\','/')
 
 #out
 out_folder = this_folder + 'err_records/'

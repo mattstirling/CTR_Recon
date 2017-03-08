@@ -52,10 +52,12 @@ df_VAR = df_VAR[np.in1d(df_VAR['Name'],df_CTR['Name'])]
 
 #drop any columns that are not in common
 common_cols = [col for col in df_CTR.columns if col in df_VAR.columns]
-df_CTR.drop(labels=[col for col in df_CTR.columns if col not in common_cols],axis=1,inplace=True)
-df_VAR.drop(labels=[col for col in df_VAR.columns if col not in common_cols],axis=1,inplace=True)
-#print len(df_CTR.columns)
-#print len(df_VAR.columns)
+for col in [col for col in df_CTR.columns if col not in common_cols]: df_VAR[col]=''
+for col in [col for col in df_VAR.columns if col not in common_cols]: df_CTR[col]=''
+#df_CTR.drop(labels=[col for col in df_CTR.columns if col not in common_cols],axis=1,inplace=True)
+#df_VAR.drop(labels=[col for col in df_VAR.columns if col not in common_cols],axis=1,inplace=True)
+print len(df_CTR.columns)
+print len(df_VAR.columns)
 
 #set index to Name
 df_CTR.set_index('Name',inplace=True)

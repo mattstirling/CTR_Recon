@@ -37,10 +37,12 @@ in_filenames = ([f for f in all_filenames
 
 #prefix the directory
 in_filenames = [in_folder + f for f in in_filenames]
+print in_folder
 
 #open each file into a dataframe (all have same header)
 df_list = []
 for f in in_filenames:
+    print f
     df_list.append(pd.read_csv(f))
 
 #merge all dataframes into 1

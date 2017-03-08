@@ -27,7 +27,7 @@ in_df = pd.read_csv(in_folder+in_file)
 #print len(df_TRS.index)
 
 #include all records from a K2 file
-df_merge = in_df[(in_df.Filename.str.contains('_derivProdData_'))]
+df_merge = in_df[(in_df.Filename.str.contains('.csv'))]
 
 #remove all placeholder deals
 #df_merge = df_merge[~(df_merge['Placeholder'] == True)]
